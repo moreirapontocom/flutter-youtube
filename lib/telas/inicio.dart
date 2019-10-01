@@ -3,16 +3,22 @@ import 'package:youtube/api.dart';
 import 'package:youtube/models/video.dart';
 
 class TelaInicio extends StatefulWidget {
+
+  String _termoPesquisa;
+
+  // Construtor
+  TelaInicio(this._termoPesquisa);
+
   @override
   _TelaInicioState createState() => _TelaInicioState();
 }
 
 class _TelaInicioState extends State<TelaInicio> {
 
-  Future<List<Video>> _pesquisaVideos() {
+  Future<List<Video>> _pesquisaVideos(String p) {
 
     Api api = Api();
-    return api.pesquisar('submarino');
+    return api.pesquisar( p );
 
   }
 
@@ -23,7 +29,7 @@ class _TelaInicioState extends State<TelaInicio> {
     // int _maxResults = 0;
 
     return FutureBuilder<List<Video>>(
-      future: _pesquisaVideos(),
+      future: _pesquisaVideos(widget._termoPesquisa),
       builder: (context, snapshot) {
 
         // Testando os stados da conexão
@@ -99,7 +105,9 @@ class _TelaInicioState extends State<TelaInicio> {
           break;
         }
 
-        // return
+        return Container(
+          child: Text('Opa'),
+        );
 
       },
     );

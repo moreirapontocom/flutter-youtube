@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/customSearchDelegate.dart';
 import 'package:youtube/telas/biblioteca.dart';
 import 'package:youtube/telas/emalta.dart';
 import 'package:youtube/telas/inicio.dart';
@@ -22,16 +23,18 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int _currentIndex = 0;
-
-  List _telas = [
-    TelaInicio(),
-    TelaEmAlta(),
-    TelaInscricoes(),
-    TelaBiblioteca(),
-  ];
+  String _pesquisa = "";
 
   @override
   Widget build(BuildContext context) {
+
+    List _telas = [
+      TelaInicio( _pesquisa ),
+      TelaEmAlta(),
+      TelaInscricoes(),
+      TelaBiblioteca(),
+    ];
+
     return Scaffold(
 
       // appBar
@@ -45,16 +48,23 @@ class _HomeState extends State<Home> {
 
         // Botões do appBar
         actions: <Widget>[
+
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              String res = await showSearch(context: context, delegate: CustomSearchDelegate());
+              print("Voltou com: " + res);
+              setState(() {
+                _pesquisa = res;
+              });
+            },
+          )
+
+          /*
           IconButton(
             icon: Icon(Icons.videocam),
             onPressed: () {
               print("Videocam");
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              print("Search");
             },
           ),
           IconButton(
@@ -63,6 +73,8 @@ class _HomeState extends State<Home> {
               print("Account");
             },
           ),
+          */
+
         ],
       ),
 

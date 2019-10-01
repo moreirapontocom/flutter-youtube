@@ -13,6 +13,8 @@ class Api {
 
   Future<List<Video>> pesquisar(String pesquisa) async {
 
+    List<Video> videos;
+
     http.Response response = await http.get(
       URL_BASE + '/search'
       '?part=snippet'
@@ -46,14 +48,15 @@ class Api {
       // Forma otimizada (no model, utiliza-se o factory)
       // Crio uma List de objetos do tipo Video
       // O map() faz o mesmo processo de um for()
-      List<Video> videos = dadosJson['items'].map<Video>((item) {
+      videos = dadosJson['items'].map<Video>((item) {
         // A função map espera objetos do tipo Video e passa cada objeto (como se fosse um for()) para a variável item
         // A variável item vai pro model como um JSON e lá é convertida pra um objeto do tipo Video
         return Video.fromJson(item);
       }).toList(); // Converte a lista de objetos do tipo Video em uma lista
 
-      return videos;
     }
+
+    return videos;
 
   }
 
