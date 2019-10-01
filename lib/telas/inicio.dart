@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:youtube/api.dart';
 import 'package:youtube/models/video.dart';
 
@@ -64,32 +65,44 @@ class _TelaInicioState extends State<TelaInicio> {
                   // Crio uma variável do tipo Video (único) que recebe cada elemento da lista
                   Video item = lista[index];
 
-                  return Column(
-                    children: <Widget>[
+                  return GestureDetector(
+                    onTap: () {
 
-                      Container(
-                        height: 180,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(item.imagem),
-                            fit: BoxFit.cover
+                      FlutterYoutube.playYoutubeVideoById(
+                        apiKey: API_KEY,
+                        videoId: item.id,
+                        autoPlay: true,
+                        fullScreen: true
+                      );
+
+                    },
+                    child: Column(
+                      children: <Widget>[
+
+                        Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(item.imagem),
+                              fit: BoxFit.cover
+                            ),
                           ),
+                          // child: Center(
+                          //   child: Icon(Icons.play_circle_filled, color: Colors.red, size: 50,)
+                          // ),
                         ),
-                        // child: Center(
-                        //   child: Icon(Icons.play_circle_filled, color: Colors.red, size: 50,)
-                        // ),
-                      ),
 
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: ListTile(
-                          title: Text( item.titulo ),
-                          subtitle: Text( item.descricao ),
-                        ),
-                      )
+                        Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: ListTile(
+                            title: Text( item.titulo ),
+                            subtitle: Text( item.descricao ),
+                          ),
+                        )
 
-                    ],
+                      ],
+                    ),
                   );
 
                 },
