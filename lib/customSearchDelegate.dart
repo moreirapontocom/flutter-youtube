@@ -58,7 +58,35 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     // Chamado a cada tecla que o usuário pressiona
     // Usando query pode-se acessar o que está na pesquisa
 
-    return Container();
+    if ( query.isNotEmpty ) {
+
+      List<String> lista = List();
+
+      lista = [
+        "Submarino", "Pasta de dentes", "Experiência", "Química", "#Boravê"
+      ].where(
+        (texto) => texto.toLowerCase().startsWith( query.toLowerCase() )
+      ).toList();
+
+      return ListView.builder(
+        itemCount: lista.length,
+        itemBuilder: (context, index) {
+
+          return ListTile(
+            title: Text( lista[index] ),
+            onTap: () {
+              close(context, lista[index]);
+            },
+          );
+
+        },
+      );
+
+    } else {
+
+      return Center(child: Text("Nada para pesquisar"),);
+
+    }
   }
   
 }
