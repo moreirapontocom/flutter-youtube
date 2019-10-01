@@ -4,6 +4,16 @@ import 'package:youtube/telas/emalta.dart';
 import 'package:youtube/telas/inicio.dart';
 import 'package:youtube/telas/inscricoes.dart';
 
+/*
+ * 
+ * 
+ * Dart Packages
+ * https://pub.dev/
+ * 
+ * 
+ * 
+ */
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -23,6 +33,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      // appBar
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.grey),
@@ -30,7 +42,8 @@ class _HomeState extends State<Home> {
           width: 98,
           height: 22,
         ),
-        // actionsIconTheme: ,
+
+        // Botões do appBar
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.videocam),
@@ -52,7 +65,14 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: _telas[_currentIndex],
+
+      // Body do Scaffold
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: _telas[_currentIndex],
+      ),
+
+      // bottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (i) {
